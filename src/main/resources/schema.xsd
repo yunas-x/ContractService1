@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://contractservice.org/service"
+           targetNamespace="http://contractservice.org/service"
+           elementFormDefault="qualified">
+
+    <xs:element name="createNewContractRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="request" type="tns:request"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createNewContractResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+                <xs:element name="content" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="request">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="date_start" type="xs:date"/>
+            <xs:element name="date_end" type="xs:date"/>
+            <xs:element name="contract_number" type="xs:int"/>
+            <xs:element name="contract_name" type="xs:string"/>
+            <xs:element name="contractual_parties" type="tns:contractual_parties"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="contractual_party">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="bank_account_number" type="xs:string"/>
+            <xs:element name="bik" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="contractual_parties">
+        <xs:sequence minOccurs="1" maxOccurs="50">
+            <xs:element name="contractual_parties" type="tns:contractual_party"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
